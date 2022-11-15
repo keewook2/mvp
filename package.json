@@ -9,7 +9,8 @@
     "dev": "webpack-dev-server --mode=development --open --hot --progress",
     "build": "webpack --mode=production --progress",
     "start:react": "webpack --mode=development --progress",
-    "start:server": "nodemon ./server/index.ts"
+    "start:server": "nodemon ./server/index.ts",
+    "start:dev": "nodemon ./server/index.ts & webpack --mode=development --progress -w"
   },
   "dependencies": {
     "axios": "^1.1.3",
@@ -31,6 +32,7 @@
     "@types/node": "^18.11.9",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.9",
+    "@types/styled-components": "^5.1.26",
     "babel-loader": "^9.1.0",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.2",
