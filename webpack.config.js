@@ -63,6 +63,18 @@ module.exports = (env, argv) => {
         } : false,
       }),
       new CleanWebpackPlugin(),
-    ]
+    ],
+    devServer: {
+      open: true,
+      host: 'localhost',
+      historyApiFallback: true,
+      port: 8080,
+      proxy: {
+        '/api': {
+          target: 'http://localhost:3000/',
+          secure: false,
+        },
+      },
+    },
   }
-}
+};

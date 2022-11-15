@@ -2,12 +2,14 @@
   "compilerOptions": {
     "outDir": "./client/dist/",
     "noImplicitAny": true,
-    "module": "es6",
+    "module": "CommonJS",
     "target": "es5",
     "jsx": "react-jsx",
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "moduleResolution": "node"
-  }
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "lib": ["es6", "dom", "es5"],
+  },
 }
