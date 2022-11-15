@@ -1,8 +1,14 @@
 import React from 'react';
+import Button from './components/Button';
+import GlobalStyle from './GlobalStyle';
 
 const App: React.FC = () => {
   return (
-    <div>Hello world</div>
+    <>
+      <GlobalStyle />
+      <div>Hello world</div>
+      <Button />
+    </>
   );
 };
 
