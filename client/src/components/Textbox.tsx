@@ -1,5 +1,12 @@
 import * as React from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
+
+interface TextboxProps {
+  placeholder: string;
+  name: string;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
 
 const TextWrapper = styled.div`
   margin-bottom: 10px;
@@ -43,10 +50,10 @@ const TextInput = styled.input`
   }
 `;
 
-const Textbox: React.FC = () => {
+const Textbox: React.FC<TextboxProps> = ({ placeholder, handleChange, name }) => {
   return (
     <TextWrapper>
-      <TextInput placeholder='제목을 입력하세요' />
+      <TextInput name={name} onChange={handleChange} placeholder={placeholder} />
     </TextWrapper>
   );
 }
