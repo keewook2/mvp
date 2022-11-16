@@ -3,13 +3,12 @@ import styled from 'styled-components';
 
 const TextWrapper = styled.div`
   margin-bottom: 10px;
-  display: flex;
-  flex-direction: column;
+  margin-right: 10px;
+  margin-left: 10px;
 `;
 
 const TextInput = styled.input`
   margin: 0;
-  padding: 0.5rem 1rem;
 
   font-family: 'Montserrat', sans-serif;
   font-size: 1rem;
@@ -18,7 +17,7 @@ const TextInput = styled.input`
   text-decoration: none;
 
   display: inline-block;
-  width: 250px;
+  width: 230px;
   border: none;
   border-radius: 4px;
 
