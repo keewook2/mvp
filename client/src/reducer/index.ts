@@ -135,7 +135,7 @@ const reducer = (state: StateType, action: ActionType) => {
         ...state,
         selected: {
           ...state.selected,
-          textShadow: true,
+          textShadow: !state.selected.textShadow,
         }
       }
     case 'CONTRAST_CLICK':
@@ -143,7 +143,7 @@ const reducer = (state: StateType, action: ActionType) => {
         ...state,
         selected: {
           ...state.selected,
-          colorContrast: true,
+          colorContrast: !state.selected.colorContrast,
         }
       }
     case 'SMALLTEXT_CLICK':
@@ -151,7 +151,7 @@ const reducer = (state: StateType, action: ActionType) => {
         ...state,
         selected: {
           ...state.selected,
-          smallText: true,
+          smallText: !state.selected.smallText,
         }
       }
     default:
