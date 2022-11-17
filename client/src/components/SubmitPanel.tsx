@@ -59,9 +59,8 @@ const SubmitPanel: React.FC = () => {
     document.querySelector('#modal').appendChild(link);
     link.href = uri;
     link.download = filename;
-    // Uncomment this line to auto-download file.
-    // link.click();
-  }
+    link.text = 'Download';
+  };
 
   return (
     <Wrapper>

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { useContext } from 'react';
 import styled from 'styled-components';
+import { AppContext } from '../context/ContextProvider';
 
 type ButtonProps = {
   text: string;
@@ -39,11 +41,33 @@ const ButtonWrapper = styled.button<{ selected: boolean }>`
 
 const Button: React.FC<ButtonProps> = ({ text }) => {
   const [selected, setSelected] = useState(false);
+  const { state, dispatch } = useContext(AppContext);
 
   const handleSelected = (e: React.MouseEvent<HTMLButtonElement>): void => {
     e.preventDefault();
     setSelected(prevSelect => !prevSelect);
+    if (text === 'Image URL') {
+      let enteredImgUrl = prompt('Enter the unsplash image URL 😇');
+      console.log(enteredImgUrl);
+      dispatch({type: 'CHANGE_IMAGE', payload: enteredImgUrl });
+      document.body.style.background = `url(${enteredImgUrl})`;
+    }
   }
+
+  const getImageFromPrompt = (): string | void => {
+    let enteredImgUrl = prompt('Enter the unsplash image URL 😇');
+    const regex =
+    /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(:[0-9]+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/;
+    if (enteredImgUrl === null) {
+      return;
+    }
+    if (!enteredImgUrl.match(regex)) {
+      alert('Invalid URL 😨');
+      return;
+    }
+    return enteredImgUrl;
+  }
+
   return (
     <ButtonWrapper onClick={handleSelected} selected={selected}>
       {text}

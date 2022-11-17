@@ -1,12 +1,10 @@
 import * as React from 'react';
+import { useRef } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import ControlPanel from './ControlPanel';
 import Preview from './Preview';
 import SubmitPanel from './SubmitPanel';
-
-export interface ContentProps {
-  imgURL: string;
-}
 
 const Wrapper = styled.div`
   position: relative;
@@ -17,10 +15,14 @@ const Wrapper = styled.div`
   z-index: 1;
 `;
 
-const Content: React.FC<ContentProps> = ({ imgURL }) => {
+const Content: React.FC = () => {
+  const titleRef = useRef<HTMLLIElement>(null);
+  const subtitleRef = useRef<HTMLLIElement>(null);
+  const categoryRef = useRef<HTMLLIElement>(null);
+
   return (
     <Wrapper>
-      <Preview imgURL={imgURL} />
+      <Preview />
       <ControlPanel />
       <SubmitPanel />
     </Wrapper>
