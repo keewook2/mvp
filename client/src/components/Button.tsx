@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { AppContext } from '../context/ContextProvider';
+import { getRandomRGB } from '../lib/colorHelper';
 
 type ButtonProps = {
   text: string;
+  selected: boolean;
 };
 
 const ButtonWrapper = styled.button<{ selected: boolean }>`
@@ -39,18 +40,95 @@ const ButtonWrapper = styled.button<{ selected: boolean }>`
   }
 `
 
-const Button: React.FC<ButtonProps> = ({ text }) => {
-  const [selected, setSelected] = useState(false);
+const Button: React.FC<ButtonProps> = ({ text, selected }) => {
   const { state, dispatch } = useContext(AppContext);
 
-  const handleSelected = (e: React.MouseEvent<HTMLButtonElement>): void => {
+  const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
     e.preventDefault();
-    setSelected(prevSelect => !prevSelect);
+    const body = document.body;
+    const preview = document.getElementById('preview');
+    const title = document.getElementById('title');
+    const subtitle = document.getElementById('subtitle');
+    const category = document.getElementById('category');
+
     if (text === 'Image URL') {
-      let enteredImgUrl = prompt('Enter the unsplash image URL 😇');
-      console.log(enteredImgUrl);
+      let enteredImgUrl = getImageFromPrompt();
+      dispatch({type: 'IMAGE_CLICK'})
       dispatch({type: 'CHANGE_IMAGE', payload: enteredImgUrl });
       document.body.style.background = `url(${enteredImgUrl})`;
+      body.style.backgroundSize = preview.style.backgroundSize = 'cover';
+      body.style.backgroundRepeat = preview.style.backgroundRepeat = 'no-repeat';
+      body.style.backgroundPosition = preview.style.backgroundPosition = 'center';
+    }
+    if (text === 'Random Gradient') {
+      dispatch({type: 'GRADIENT_CLICK'})
+      const rgb1 = getRandomRGB();
+      const rgb2 = getRandomRGB();
+      document.body.style.background = `linear-gradient(to bottom, #${rgb1}, #${rgb2})`;
+      document.getElementById('preview').style.background = `linear-gradient(to bottom, #${rgb1}, #${rgb2})`;
+    }
+    if (text === 'Random Solid Color') {
+      dispatch({type: 'SOLID_CLICK'});
+      const rgb = getRandomRGB();
+      document.body.style.background = `#${rgb}`;
+      document.getElementById('preview').style.background = `#${rgb}`;
+    }
+    if (text === 'Title / Subtitle / Category') {
+      dispatch({type: 'THREE_CLICK'});
+      title.style.visibility= 'visible';
+      subtitle.style.visibility = 'visible';
+      category.style.visibility = 'visible';
+    }
+    if (text === 'Title / Category') {
+      dispatch({type: 'TWO_CLICK'});
+      title.style.visibility= 'visible';
+      subtitle.style.visibility = 'visible';
+      category.style.visibility = 'hidden';
+    }
+    if (text === 'Title only') {
+      dispatch({type: 'ONE_CLICK'});
+      title.style.visibility= 'visible';
+      subtitle.style.visibility = 'hidden';
+      category.style.visibility = 'hidden';
+    }
+    if (text === 'Text Shadow') {
+      dispatch({type: 'TEXTSHADOW_CLICK'});
+      const arr = [title, subtitle, category];
+      arr.forEach((item) => {
+        if (selected) {
+          item.style.textShadow = '2px 2px 4px rgba(0,0,0,0.4)';
+        } else {
+          item.style.textShadow = '';
+        }
+      });
+    }
+    if (text === 'Color Contrast') {
+      dispatch({type: 'CONTRAST_CLICK'});
+      const arr = [title, subtitle, category];
+      arr.forEach((item) => {
+        if (selected) {
+          item.style.color = 'black';
+          subtitle.style.borderTop = '1px solid #000';
+        } else {
+          item.style.color = '#fff';
+          subtitle.style.borderTop = '1px solid #fff';
+        }
+      })
+    }
+    if (text === 'Smaller Text') {
+      dispatch({type: 'SMALLTEXT_CLICK'});
+      const arr = [title, subtitle, category];
+      arr.forEach((item) => {
+        if (selected) {
+          title.style.fontSize = '46px';
+          subtitle.style.fontSize = '22px';
+          category.style.fontSize = '22px';
+        } else {
+          title.style.fontSize = '54px';
+          subtitle.style.fontSize = '24px';
+          category.style.fontSize = '24px';
+        }
+      })
     }
   }
 
@@ -69,7 +147,7 @@ const Button: React.FC<ButtonProps> = ({ text }) => {
   }
 
   return (
-    <ButtonWrapper onClick={handleSelected} selected={selected}>
+    <ButtonWrapper onClick={handleButtonClick} selected={selected}>
       {text}
     </ButtonWrapper>
   );
