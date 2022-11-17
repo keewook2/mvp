@@ -1,5 +1,7 @@
 import * as React from 'react';
+import { useContext } from 'react';
 import styled from 'styled-components';
+import { AppContext } from '../context/ContextProvider';
 import Button from './Button';
 
 const Wrapper = styled.div`
@@ -27,30 +29,32 @@ const ButtonDiv = styled.div`
 `;
 
 const StyleField: React.FC = () => {
+  const {state, dispatch} = useContext(AppContext);
+
   return (
     <>
       <Wrapper>
         <Title>Choose background</Title>
         <ButtonDiv>
-          <Button text='Random Gradient'/>
-          <Button text='Random Solid Color'/>
-          <Button text='Image URL'/>
+          <Button text='Random Gradient' selected={state.selected.gradient}/>
+          <Button text='Random Solid Color' selected={state.selected.solid}/>
+          <Button text='Image URL' selected={state.selected.image}/>
         </ButtonDiv>
       </Wrapper>
       <Wrapper>
         <Title>Choose component</Title>
         <ButtonDiv>
-          <Button text='Title / Subtitle / Category'/>
-          <Button text='Title / Category'/>
-          <Button text='Title only'/>
+          <Button text='Title / Subtitle / Category' selected={state.selected.three}/>
+          <Button text='Title / Category' selected={state.selected.two} />
+          <Button text='Title only' selected={state.selected.one}/>
         </ButtonDiv>
       </Wrapper>
       <Wrapper>
         <Title>Text style</Title>
         <ButtonDiv>
-          <Button text='Text Shadow'/>
-          <Button text='Color Contrast'/>
-          <Button text='Smaller Text'/>
+          <Button text='Text Shadow' selected={state.selected.textShadow} />
+          <Button text='Color Contrast' selected={state.selected.colorContrast}/>
+          <Button text='Smaller Text' selected={state.selected.smallText} />
         </ButtonDiv>
       </Wrapper>
     </>
