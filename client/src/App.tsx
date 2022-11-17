@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import GlobalStyle from './GlobalStyle';
 import Content from './components/Content';
+import { useContext } from 'react';
+import ContextProvider, { AppContext } from './context/ContextProvider';
 
 const App: React.FC = () => {
-  const [imgURL, setImgURL] = useState('https://images.unsplash.com/photo-1620121478247-ec786b9be2fa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1489&q=80');
+  const { state, dispatch } = useContext(AppContext);
 
   return (
     <>
-      <GlobalStyle imgURL={imgURL}/>
-      <div>Thumbnail maker</div>
-      <Content imgURL={imgURL} />
+      <ContextProvider>
+        <GlobalStyle imgURL={state.imgURL}/>
+        <div>Thumbnail maker</div>
+        <Content />
+      </ContextProvider>
     </>
   );
 };

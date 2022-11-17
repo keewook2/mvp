@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useContext } from 'react';
 import styled from 'styled-components';
+import { AppContext } from '../context/ContextProvider';
 import Textbox from './Textbox';
 
 const Wrapper = styled.div`
@@ -12,17 +13,16 @@ const Wrapper = styled.div`
 `;
 
 const InputField: React.FC = () => {
-  const [inputs, setInputs] = useState({
-    title: '>Enter title',
-    subtitle: '>Enter subtitle',
-    category: '>Enter category',
-  });
+  const {state, dispatch} = useContext(AppContext);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setInputs({
-      ...inputs,
-      [name]: value,
+    dispatch({
+      type: 'CHANGE_INPUT',
+      payload: {
+        name: name,
+        value: value
+      }
     });
   };
 
