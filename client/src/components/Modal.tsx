@@ -39,7 +39,13 @@ const ModalWrapper = styled.section`
 
 const Modal: React.FC<ModalProps> = ({ setModalOpen }) => {
   const handleBackgroundClick = (): void => {
+    removeCapture();
     setModalOpen(false);
+  }
+
+  const removeCapture = (): void => {
+    const canvasImg = document.querySelector('#modal');
+    canvasImg.removeChild(canvasImg.firstElementChild);
   }
 
   return (
