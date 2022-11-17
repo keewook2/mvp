@@ -56,6 +56,7 @@ const Button: React.FC<ButtonProps> = ({ text, selected }) => {
       dispatch({type: 'IMAGE_CLICK'})
       dispatch({type: 'CHANGE_IMAGE', payload: enteredImgUrl });
       document.body.style.background = `url(${enteredImgUrl})`;
+      preview.style.background = `url(${enteredImgUrl})`;
       body.style.backgroundSize = preview.style.backgroundSize = 'cover';
       body.style.backgroundRepeat = preview.style.backgroundRepeat = 'no-repeat';
       body.style.backgroundPosition = preview.style.backgroundPosition = 'center';
