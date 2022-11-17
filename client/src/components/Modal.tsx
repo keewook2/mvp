@@ -22,6 +22,8 @@ const ModalWrapper = styled.section`
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1000;
+  color: white;
+  font-size: 24px;
 
   &:after {
     position: absolute;
@@ -51,7 +53,7 @@ const Modal: React.FC<ModalProps> = ({ setModalOpen }) => {
   return (
     <Background onClick={handleBackgroundClick}>
       <ModalWrapper id='modal'>
-        modal
+      🎉 Done! save as image and enjoy! 🎉
       </ModalWrapper>
     </Background>
   );

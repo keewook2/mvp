@@ -25,6 +25,11 @@ const GlobalStyle = createGlobalStyle<Props>`
       backdrop-filter: blur(10px);
     }
   }
+
+  a {
+   color: white;
+   text-decoration: none;
+  }
 `;
 
 export default GlobalStyle;
