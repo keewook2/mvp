@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Wrapper = styled.header`
@@ -20,7 +21,7 @@ const Logo = styled.h1``;
 
 const NavBtn = styled.nav``;
 
-const Menu = styled.span`
+const MenuLink = styled(Link)`
   margin-right: 20px;
   cursor: pointer;
 `;
@@ -31,8 +32,8 @@ const Header: React.FC = () => {
     <Wrapper>
       <Logo>Thumbnail maker</Logo>
       <NavBtn>
-        <Menu>Main Page</Menu>
-        <Menu>Archive</Menu>
+        <MenuLink to='/'>Main Page</MenuLink>
+        <MenuLink to='/archive'>Archive</MenuLink>
       </NavBtn>
     </Wrapper>
   )
