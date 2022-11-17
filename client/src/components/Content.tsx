@@ -7,6 +7,7 @@ import Preview from './Preview';
 import SubmitPanel from './SubmitPanel';
 
 const Wrapper = styled.div`
+  top: 56px;
   position: relative;
   margin: 0 auto;
   width: 768px;
