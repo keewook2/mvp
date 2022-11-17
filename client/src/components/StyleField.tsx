@@ -57,4 +57,4 @@ const StyleField: React.FC = () => {
   )
 }
 
-export default StyleField;
+export default React.memo(StyleField);
